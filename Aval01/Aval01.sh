@@ -9,6 +9,28 @@ ArquivoControle="/etc/ips.txt"
 
 # TODO - Se arquivo não existe, crie-o.
 
+test -f $ArquivoControle || touch $ArquivoControle 2>> aval01.log
+
+IP="null"
+Param=$#
+if [ \( $Param -lt 1 \) -o \( $Param -gt 2 \) ]
+then
+   echo "Erro na chamada"
+   echo "Para ajuda, digite: "$0" -h"
+   exit 4
+else
+   if [ $Param -eq 2 ]
+   then
+      IP=$2
+#      echo "recebeu segundo parâmetro"
+   else
+#      echo "somente um parâmetro"
+   fi
+fi
+
+
+
+
 Adicionar(){
 
 # TODO - Testar se IP passado depois do parâmetro "-a" é válido.
