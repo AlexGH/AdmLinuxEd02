@@ -13,7 +13,7 @@ test -f $ArquivoControle || touch $ArquivoControle 2>> aval01.log
 
 IP="null"
 Param=$#
-if [ \( $Param -lt 1 \) -o \( $Param -gt 2 \) ]
+if [ \( "$Param" -lt 1 \) -o \( "$Param" -gt 2 \) ]
 then
    echo "Erro na chamada"
    echo "Para ajuda, digite: "$0" -h"
