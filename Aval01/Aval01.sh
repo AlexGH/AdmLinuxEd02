@@ -39,7 +39,19 @@ Adicionar(){
 # TODO - Exibir uma mensagem de sucesso para o usuário.
 #	 Sair com código de erro 0.
 
+o1=`echo $IP | cut -d "." -f 1`
+o2=`echo $IP | cut -d "." -f 2`
+o3=`echo $IP | cut -d "." -f 3`
+o4=`echo $IP | cut -d "." -f 4`
+
+if [ \( "$o1" -lt 0 -o "$o1" -gt 255 \) -o \( "$o2" -lt 0 -o "$o2" -gt 255 \)  -o  \( "$o3" -lt 0 -o "$o3" -gt 255 \)  -o \( "$o4" -lt 0 -o "$o4" -gt 255 \) ] ;
+then echo "IP Invalido!"; exit 1;
+fi
+echo $IP >> $ArquivoControle
+echo "IP adicionado com sucesso"
+exit 0
 }
+
 
 Remover(){
 
@@ -51,6 +63,7 @@ Remover(){
 
 }
 
+
 Listar(){
 
 # TODO - Listar todos os IPs do "ArquivoControle"
@@ -59,7 +72,23 @@ Listar(){
 #	 Exibir IPs encontrados com o filtro e sair com código de erro 0.
 #	 Caso nenhum IP seja encontrado, exibir mensagem de erro e sair com código de erro 3.
 
+if [ "$IP" == "null" ] ;
+  then
+     cat $ArquivoControle ;
+     exit 0 ;
+  else
+     if [  ` cat $ArquivoControle | grep $IP | wc -l ` -gt 0 ] ;
+       then
+          cat $ArquivoControle | grep $IP ;
+          exit 0 ;
+       else
+         echo "IP não encontrado" ;
+         exit 3 ;
+     fi
+fi
 }
+
+
 
 Ajuda(){
 
